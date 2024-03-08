@@ -1,10 +1,10 @@
 {
-  "name": "Lutris",
-  "description": "Lutris desktop client.",
-  "version": "0.5.16",
-  "image": "ghcr.io/containerpak/lutris:main",
-  "binaries": ["/usr/bin/lutris"],
-  "desktop_entries": ["/usr/share/applications/lutris.desktop"],
+  "name": "lilipod",
+  "description": "Lilipod is a simple container manager, able to download, unpack and use OCI images from various container registries.",
+  "version": "0.0.1",
+  "image": "ghcr.io/containerpak/lilipod:main",
+  "binaries": ["/usr/bin/lilipod"],
+  "desktop_entries": [],
   "dependencies": [],
   "addons": [],
   "idle_time": 0,
@@ -13,7 +13,7 @@
     "socketWayland": true,
     "socketPulseAudio": true,
     "socketSessionBus": true,
-    "socketSystemBus": false,
+    "socketSystemBus": true,
     "socketSshAgent": false,
     "socketCups": false,
     "socketGpgAgent": false,
@@ -27,7 +27,7 @@
     "fsExtra": [],
     "env": [],
     "network": true,
-    "process": false,
+    "process": true,
     "asRoot": false
   }
 }
