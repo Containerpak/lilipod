@@ -1,3 +1,7 @@
 FROM ghcr.io/containerpak/base:main
 
-RUN apt install -y wget && wget https://github.com/89luca89/lilipod/releases/download/v0.0.1/lilipod-linux-amd64 -O /usr/bin/lilipod && apt remove -y wget && chmod +x /usr/bin/lilipod && /usr/bin/cpak-clean-junk
+RUN apt-get update && apt-get install -y --no-install-recommends wget && \
+    wget https://github.com/89luca89/lilipod/releases/download/v0.0.1/lilipod-linux-amd64 -O /usr/bin/lilipod && \
+    chmod +x /usr/bin/lilipod && \
+    apt-get remove -y wget && apt-get autoremove -y && \
+    /usr/bin/cpak-clean-junk
