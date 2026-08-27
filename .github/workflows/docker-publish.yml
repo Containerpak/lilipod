@@ -17,12 +17,12 @@ jobs:
 
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
       id-token: write
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
     - name: Build the Docker image
       run: docker image build -f Containerfile --tag ghcr.io/containerpak/lilipod:main .
@@ -31,6 +31,20 @@ jobs:
       run: |
         docker login ghcr.io -u ${{ env.REGISTRY_USER }} -p ${{ env.REGISTRY_PASSWORD }}
         docker image push "ghcr.io/containerpak/lilipod:main"
+
+    - name: Pin published image
+      run: |
+        repository="$(jq -r '.image | split("@")[0]' cpak.json)"
+        digest="$(docker manifest inspect --verbose "${repository}:main" | jq -r '.Descriptor.digest')"
+        jq --arg image "${repository}@${digest}" '.image = $image' cpak.json > cpak.json.next
+        mv cpak.json.next cpak.json
+        if ! git diff --quiet -- cpak.json; then
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cpak.json
+          git commit -m "chore: pin published image [skip ci]"
+          git push origin "HEAD:${{ github.event.repository.default_branch }}"
+        fi
 
     - uses: sigstore/cosign-installer@d7543c93d881b35a8faa02e8e3605f69b7a1ce62
 
@@ -47,7 +61,6 @@ jobs:
         repository="$(printf '%s' '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')"
         cpak-sign state \
           --origin "github.com/${repository}" \
-          --image "ghcr.io/${repository}:main" \
           --generation "${{ github.run_number }}"
         cosign sign-blob --yes --new-bundle-format=true \
           --bundle cpak-state.sigstore.json cpak-state

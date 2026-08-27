@@ -1,19 +1,20 @@
 {
+  "$schema": "https://raw.githubusercontent.com/Containerpak/cpak/v2/schema/manifest-v3.json",
+  "manifest_version": "3.0",
   "name": "lilipod",
   "description": "Lilipod is a simple container manager, able to download, unpack and use OCI images from various container registries.",
   "version": "0.0.1",
-  "image": "ghcr.io/containerpak/lilipod:main",
-  "binaries": ["/usr/bin/lilipod"],
+  "image": "ghcr.io/containerpak/lilipod@sha256:13585ac29c1d538fc54a9f1a716cb54e136aef9d966c617c4ed4be236c6af0da",
+  "binaries": [
+    "/usr/bin/lilipod"
+  ],
   "desktop_entries": [],
   "dependencies": [],
   "addons": [],
   "idle_time": 0,
   "override": {
-    "socketX11": true,
     "socketWayland": true,
     "socketPulseAudio": true,
-    "socketSessionBus": true,
-    "socketSystemBus": true,
     "socketSshAgent": false,
     "socketCups": false,
     "socketGpgAgent": false,
@@ -21,13 +22,15 @@
     "deviceKvm": false,
     "deviceShm": false,
     "deviceAll": true,
-    "fsHost": false,
-    "fsHostEtc": false,
-    "fsHostHome": true,
-    "fsExtra": [],
     "env": [],
     "network": true,
     "process": true,
-    "asRoot": false
+    "asRoot": false,
+    "filesystem": [
+      {
+        "path": "home",
+        "access": "read-write"
+      }
+    ]
   }
 }
