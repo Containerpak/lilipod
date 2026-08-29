@@ -13,24 +13,42 @@
   "addons": [],
   "idle_time": 0,
   "override": {
-    "socketWayland": true,
-    "socketPulseAudio": true,
+    "displayX11": false,
+    "socketWayland": false,
+    "socketPulseAudio": false,
     "socketSshAgent": false,
     "socketCups": false,
     "socketGpgAgent": false,
+    "bluetooth": false,
     "deviceDri": false,
     "deviceKvm": false,
     "deviceShm": false,
-    "deviceAll": true,
-    "env": [],
-    "network": true,
-    "process": true,
-    "asRoot": false,
+    "deviceAlsa": false,
+    "deviceVideo": false,
+    "deviceFuse": false,
+    "deviceTun": false,
+    "deviceUsb": false,
+    "deviceSerial": false,
+    "deviceInput": false,
+    "deviceTTY": false,
+    "deviceAll": false,
+    "notification": false,
+    "openURI": false,
+    "hostApplications": false,
     "filesystem": [
       {
         "path": "home",
         "access": "read-write"
       }
-    ]
+    ],
+    "env": [],
+    "network": true,
+    "hostNetwork": false,
+    "process": false,
+    "userNamespaces": true,
+    "memoryMaxMB": 0,
+    "cpuQuota": 0,
+    "pidsMax": 0,
+    "asRoot": false
   }
 }
