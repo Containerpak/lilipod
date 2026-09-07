@@ -4,7 +4,7 @@
   "name": "lilipod",
   "description": "Lilipod is a simple container manager, able to download, unpack and use OCI images from various container registries.",
   "version": "0.0.1",
-  "image": "ghcr.io/containerpak/lilipod@sha256:a943e175082493267fab389b053c5cef0dd26d84ff05d2f92258c1c13a6a14d8",
+  "image": "ghcr.io/containerpak/lilipod@sha256:0f8be2447430b22a1cd42004f5c0cdd330d50c3f0fecec6615159c4e396cf484",
   "binaries": [
     "/usr/bin/lilipod"
   ],
